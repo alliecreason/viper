@@ -1,0 +1,32 @@
+<tool id="aracne2regulon" name="Aracne2regulon" version="@VERSION@.0" profile="17.09">
+    <description>Arachne Network to Viper Regulons..</description>
+
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements"/>
+    @VERSION_CMD@
+
+    <command detect_errors="exit_code"><![CDATA[
+        run_aracne2regulon.r
+        --network $network
+        --expr $expr
+        --output $output
+    ]]></command>
+
+    <inputs>
+        <param name="network" type="data" format="txt" label="Arachne Network" help="ARACNE network"/>
+        <param name="expr" type="data" format="tsv" label="Expression Matrix" help="Expression matrix used to build ARACNE network."/>
+    </inputs>
+
+    <outputs>
+        <data format="rdata" name="output" label="${tool.name}: Viper Regulons"/>
+    </outputs>
+
+    <help><![CDATA[
+    "This command runs aracne2regulon to convert an aracne network to VIPER regulons. The output is a serialized R object (RDS format)."
+    ]]></help>
+
+    <expand macro="citations" />
+
+</tool>

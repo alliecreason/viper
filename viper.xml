@@ -1,0 +1,32 @@
+<tool id="viper" name="Viper" version="@VERSION@.0" profile="17.09">
+    <description>VIPER Inference Analysis.</description>
+
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements"/>
+    @VERSION_CMD@
+
+    <command detect_errors="exit_code"><![CDATA[
+        run_viper.r
+        --regulons $regulons
+        --expr $expr
+        --output $output
+    ]]></command>
+
+    <inputs>
+        <param name="regulons" type="data" format="rdata" label="Network Regulons" help="RDS file containing network regulons."/>
+        <param name="expr" type="data" format="tsv" label="Expression Matrix" help="Expression of samples for which viper activity scores are desired."/>
+    </inputs>
+
+    <outputs>
+        <data format="tsv" name="output" label="${tool.name}: Viper Activities"/>
+    </outputs>
+
+    <help><![CDATA[
+    "This command runs the inference analysis, outputing a matrix of regulator activity values per sample (TSV format)."
+    ]]></help>
+
+    <expand macro="citations" />
+
+</tool>
