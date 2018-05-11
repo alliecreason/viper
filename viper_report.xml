@@ -1,0 +1,34 @@
+<tool id="viper_report" name="Viper Report" version="@VERSION@.0" profile="17.09">
+    <description>Viper Report.</description>
+
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements"/>
+    @VERSION_CMD@
+
+    <command detect_errors="exit_code"><![CDATA[
+        viper_report.r
+        --activity $activity
+        --sample $sample
+        --gene $gene
+        --output $output
+    ]]></command>
+
+    <inputs>
+        <param name="activity" type="data" format="tsv" label="Viper Activities" help="VIPER inferred activities"/>
+        <param name="sample" type="text" label="Sample Name" help="Name of sample of interest."/>
+        <param name="gene" type="text" label="Ensembl Gene ID" help="Gene of interest (Ensembl Gene ID)."/>
+    </inputs>
+
+    <outputs>
+        <data format="png" name="output" label="${tool.name}: Viper Report"/>
+    </outputs>
+
+    <help><![CDATA[
+        "This command generates a visualization of the activity of a regulator gene for a given sample. Output is a PNG image." 
+    ]]></help>
+
+    <expand macro="citations" />
+
+</tool>
